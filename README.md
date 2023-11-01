@@ -1,3 +1,6 @@
+
+![lyra](https://github.com/zdanl/Lyra-SDK/assets/114028070/e3986fc7-3ba3-453f-84de-5c2138f5baa9)
+
 # Lyra SDK
 
 Official NodeJS SDK for [Lyra](https://lyra.com)
