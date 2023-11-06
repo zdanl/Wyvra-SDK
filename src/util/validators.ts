@@ -1,10 +1,10 @@
 import isIPFS from 'is-ipfs';
-import { LyraConfig } from '..';
+import { WyvraConfig } from '..';
 import { ERROR_NO_CREDENTIALS_PROVIDED } from '../constants';
 import { version } from '../../package.json';
 
 const commonHeaders = {
-    'x-lyra-origin': 'sdk',
+    'x-wyvra-origin': 'sdk',
     'x-version': version
 };
 export interface axiosHeaders {
@@ -17,43 +17,43 @@ export interface axiosHeaders {
 }
 
 export function validateApiKeys(
-    lyraApiKey?: string,
-    lyraSecretApiKey?: string
+    wyvraApiKey?: string,
+    wyvraSecretApiKey?: string
 ) {
-    if (!lyraApiKey || lyraApiKey === '') {
+    if (!wyvraApiKey || wyvraApiKey === '') {
         throw new Error(
-            'No lyraApiKey provided! Please provide your lyra api key as an argument when you start this script'
+            'No wyvraApiKey provided! Please provide your wyvra api key as an argument when you start this script'
         );
     }
-    if (!lyraSecretApiKey || lyraSecretApiKey === '') {
+    if (!wyvraSecretApiKey || wyvraSecretApiKey === '') {
         throw new Error(
-            'No lyraSecretApiKey provided! Please provide your lyra secret api key as an argument when you start this script'
+            'No wyvraSecretApiKey provided! Please provide your wyvra secret api key as an argument when you start this script'
         );
     }
 }
 
-export function createConfigForAxiosHeaders(config: LyraConfig) {
+export function createConfigForAxiosHeaders(config: WyvraConfig) {
     if (
-        config.lyraApiKey &&
-        config.lyraApiKey.length > 0 &&
-        config.lyraSecretApiKey &&
-        config.lyraSecretApiKey.length > 0
+        config.wyvraApiKey &&
+        config.wyvraApiKey.length > 0 &&
+        config.wyvraSecretApiKey &&
+        config.wyvraSecretApiKey.length > 0
     ) {
         return {
             withCredentials: true,
             headers: {
                 ...commonHeaders,
-                lyra_api_key: config.lyraApiKey,
-                lyra_secret_api_key: config.lyraSecretApiKey
+                wyvra_api_key: config.wyvraApiKey,
+                wyvra_secret_api_key: config.wyvraSecretApiKey
             }
         };
     }
 
-    if (config.lyraJWTKey && config.lyraJWTKey.length > 0) {
+    if (config.wyvraJWTKey && config.wyvraJWTKey.length > 0) {
         return {
             headers: {
                 ...commonHeaders,
-                Authorization: `Bearer ${config.lyraJWTKey}`
+                Authorization: `Bearer ${config.wyvraJWTKey}`
             }
         };
     }
@@ -62,7 +62,7 @@ export function createConfigForAxiosHeaders(config: LyraConfig) {
 }
 
 export function createConfigForAxiosHeadersWithFormData(
-    config: LyraConfig,
+    config: WyvraConfig,
     boundaryValue: string
 ) {
     const requestOptions: axiosHeaders = {
@@ -168,7 +168,7 @@ export function validatePinPolicyStructure(pinPolicy: { regions: any[] }) {
     }
 }
 
-export function validateLyraOptions(options: {
+export function validateWyvraOptions(options: {
     cidVersion?: number;
     wrapWithDirectory?: boolean;
     hostNodes?: any;

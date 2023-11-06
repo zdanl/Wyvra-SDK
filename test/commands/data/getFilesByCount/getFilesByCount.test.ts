@@ -5,15 +5,15 @@ import {
     pinListAxiosMockPages,
     fakeHeaders
 } from '../pinlist-sample-api';
-import { LyraConfig, LyraPin, LyraPinListFilterOptions } from '../../../../src';
+import { WyvraConfig, WyvraPin, WyvraPinListFilterOptions } from '../../../../src';
 
 jest.mock('axios');
 
 const metadataName = (item) => {
     return item.metadata.name;
 };
-const callIterableObject = async (config: LyraConfig, filterToApply: LyraPinListFilterOptions, pinsCount?: number) => {
-    const pins: LyraPin[] = [];
+const callIterableObject = async (config: WyvraConfig, filterToApply: WyvraPinListFilterOptions, pinsCount?: number) => {
+    const pins: WyvraPin[] = [];
     for await (const item of getFilesByCount(
         config,
         filterToApply,
@@ -26,9 +26,9 @@ const callIterableObject = async (config: LyraConfig, filterToApply: LyraPinList
 };
 
 describe('Get Files By Count', () => {
-    const lyraConfig = {
-        lyraApiKey: fakeHeaders.headers.lyra_api_key,
-        lyraSecretApiKey: fakeHeaders.headers.lyra_secret_api_key
+    const wyvraConfig = {
+        wyvraApiKey: fakeHeaders.headers.wyvra_api_key,
+        wyvraSecretApiKey: fakeHeaders.headers.wyvra_secret_api_key
     };
     const filterToApply = {
         status: 'pinned'
@@ -46,7 +46,7 @@ describe('Get Files By Count', () => {
             .mockResolvedValueOnce(pinListAxiosMockPages.secondPage.response);
 
         const pins = await callIterableObject(
-            lyraConfig,
+            wyvraConfig,
             filterToApply,
             pinsToRequest
         );
@@ -76,7 +76,7 @@ describe('Get Files By Count', () => {
             pinListAxiosMockPages.firstPage.response
         );
         const pins = await callIterableObject(
-            lyraConfig,
+            wyvraConfig,
             filterToApply,
             pinsToRequest
         );
@@ -103,7 +103,7 @@ describe('Get Files By Count', () => {
                 pinListAxiosMockPages.thirdPageEmpty.response
             );
         const pins = await callIterableObject(
-            lyraConfig,
+            wyvraConfig,
             filterToApply,
             pinsToRequest
         );
@@ -139,7 +139,7 @@ describe('Get Files By Count', () => {
             pinListAxiosMockPages.firstPageEmpty.response
         );
         const pins = await callIterableObject(
-            lyraConfig,
+            wyvraConfig,
             filterToApply,
             pinsToRequest
         );
@@ -164,7 +164,7 @@ describe('Get Files By Count', () => {
                 pinListAxiosMockPages.thirdPageEmpty.response
             );
         const pins = await callIterableObject(
-            lyraConfig,
+            wyvraConfig,
             filterToApply
         );
         expect(pins).toEqual(APIData.rows.map(metadataName));
@@ -194,7 +194,7 @@ describe('Get Files By Count', () => {
             pinListAxiosMockPages.firstPageEmpty.response
         );
         const pins = await callIterableObject(
-            lyraConfig,
+            wyvraConfig,
             filterToApply
         );
 

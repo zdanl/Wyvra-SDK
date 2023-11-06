@@ -1,66 +1,66 @@
 import './require-babel-polyfill';
 import pinByHash, {
-    LyraPinByHashPinOptions
+    WyvraPinByHashPinOptions
 } from './commands/pinning/pinByHash';
 import hashMetadata from './commands/pinning/hashMetadata';
 import pinFileToIPFS, {
-    LyraPinOptions
+    WyvraPinOptions
 } from './commands/pinning/pinFileToIPFS';
 import pinFromFS from './commands/pinning/pinFromFS';
 import pinJSONToIPFS from './commands/pinning/pinJSONToIPFS';
 import pinJobs, {
-    LyraPinJobsFilterOptions
+    WyvraPinJobsFilterOptions
 } from './commands/pinning/pinJobs/pinJobs';
 import unpin from './commands/pinning/unpin';
 import testAuthentication from './commands/data/testAuthentication';
 import pinList, {
-    LyraMetadata,
-    LyraPinListFilterOptions
+    WyvraMetadata,
+    WyvraPinListFilterOptions
 } from './commands/data/pinList/pinList';
 import getFilesByCount from './commands/data/getFilesByCount/getFilesByCount';
 import userPinnedDataTotal from './commands/data/userPinnedDataTotal';
 
-export interface LyraConfig {
-    lyraApiKey?: string;
-    lyraSecretApiKey?: string;
-    lyraJWTKey?: string;
+export interface WyvraConfig {
+    wyvraApiKey?: string;
+    wyvraSecretApiKey?: string;
+    wyvraJWTKey?: string;
 }
 
 
 
-function refactorConfig(lyraConfigParam: LyraConfig): LyraConfig {
-    const config: LyraConfig = {};
-    if (lyraConfigParam.lyraApiKey) {
-        config.lyraApiKey = lyraConfigParam.lyraApiKey;
+function refactorConfig(wyvraConfigParam: WyvraConfig): WyvraConfig {
+    const config: WyvraConfig = {};
+    if (wyvraConfigParam.wyvraApiKey) {
+        config.wyvraApiKey = wyvraConfigParam.wyvraApiKey;
     }
 
-    if (lyraConfigParam.lyraSecretApiKey) {
-        config.lyraSecretApiKey = lyraConfigParam.lyraSecretApiKey;
+    if (wyvraConfigParam.wyvraSecretApiKey) {
+        config.wyvraSecretApiKey = wyvraConfigParam.wyvraSecretApiKey;
     }
 
-    if (lyraConfigParam.lyraJWTKey) {
-        config.lyraJWTKey = lyraConfigParam.lyraJWTKey;
+    if (wyvraConfigParam.wyvraJWTKey) {
+        config.wyvraJWTKey = wyvraConfigParam.wyvraJWTKey;
     }
 
     return config;
 }
 function sanitizeConfig(
-    lyraApiKey?: string | LyraConfig,
-    lyraSecretApiKey?: string
-): LyraConfig {
-    let config: LyraConfig = {};
+    wyvraApiKey?: string | WyvraConfig,
+    wyvraSecretApiKey?: string
+): WyvraConfig {
+    let config: WyvraConfig = {};
 
     if (
-        typeof lyraApiKey === 'string' &&
-        typeof lyraSecretApiKey === 'string'
+        typeof wyvraApiKey === 'string' &&
+        typeof wyvraSecretApiKey === 'string'
     ) {
-        config.lyraApiKey = lyraApiKey;
-        config.lyraSecretApiKey = lyraSecretApiKey;
+        config.wyvraApiKey = wyvraApiKey;
+        config.wyvraSecretApiKey = wyvraSecretApiKey;
     }
 
-    const isLyraConfigParam = typeof lyraApiKey === 'object';
-    if (isLyraConfigParam) {
-        config = refactorConfig(lyraApiKey);
+    const isWyvraConfigParam = typeof wyvraApiKey === 'object';
+    if (isWyvraConfigParam) {
+        config = refactorConfig(wyvraApiKey);
     }
 
     if (
@@ -68,55 +68,55 @@ function sanitizeConfig(
         process?.env?.PINATA_JWT_KEY
     ) {
         config = refactorConfig({
-            lyraApiKey: process.env.PINATA_API_KEY,
-            lyraSecretApiKey: process.env.PINATA_SECRET_API_KEY,
-            lyraJWTKey: process.env.PINATA_JWT_KEY
+            wyvraApiKey: process.env.PINATA_API_KEY,
+            wyvraSecretApiKey: process.env.PINATA_SECRET_API_KEY,
+            wyvraJWTKey: process.env.PINATA_JWT_KEY
         });
     }
 
     return config;
 }
 
-class LyraClient {
-    config: LyraConfig;
+class WyvraClient {
+    config: WyvraConfig;
 
     constructor(
-        lyraApiKey?: string | LyraConfig,
-        lyraSecretApiKey?: string
+        wyvraApiKey?: string | WyvraConfig,
+        wyvraSecretApiKey?: string
     ) {
-        this.config = sanitizeConfig(lyraApiKey, lyraSecretApiKey);
+        this.config = sanitizeConfig(wyvraApiKey, wyvraSecretApiKey);
     }
 
-    pinByHash(hashToPin: string, options?: LyraPinByHashPinOptions) {
+    pinByHash(hashToPin: string, options?: WyvraPinByHashPinOptions) {
         return pinByHash(this.config, hashToPin, options);
     }
 
-    hashMetadata(ipfsPinHash: string, metadata: LyraMetadata) {
+    hashMetadata(ipfsPinHash: string, metadata: WyvraMetadata) {
         return hashMetadata(this.config, ipfsPinHash, metadata);
     }
 
-    pinFileToIPFS(readableStream: any, options?: LyraPinOptions) {
+    pinFileToIPFS(readableStream: any, options?: WyvraPinOptions) {
         return pinFileToIPFS(this.config, readableStream, options);
     }
 
-    pinFromFS(sourcePath: string, options?: LyraPinOptions) {
+    pinFromFS(sourcePath: string, options?: WyvraPinOptions) {
         return pinFromFS(this.config, sourcePath, options);
     }
-    pinJSONToIPFS(body: any, options?: LyraPinOptions) {
+    pinJSONToIPFS(body: any, options?: WyvraPinOptions) {
         return pinJSONToIPFS(this.config, body, options);
     }
-    pinJobs(filters?: LyraPinJobsFilterOptions) {
+    pinJobs(filters?: WyvraPinJobsFilterOptions) {
         return pinJobs(this.config, filters);
     }
     unpin(hashToUnpin: string) {
         return unpin(this.config, hashToUnpin);
     }
 
-    pinList(filters: LyraPinListFilterOptions) {
+    pinList(filters: WyvraPinListFilterOptions) {
         return pinList(this.config, filters);
     }
 
-    getFilesByCount(filters: LyraPinListFilterOptions, maxCount?: number) {
+    getFilesByCount(filters: WyvraPinListFilterOptions, maxCount?: number) {
         return getFilesByCount(this.config, filters, maxCount);
     }
 
@@ -128,9 +128,9 @@ class LyraClient {
     }
 }
 
-module.exports = LyraClient;
+module.exports = WyvraClient;
 
 export * from './commands/data';
 export * from './commands/pinning';
 
-export default LyraClient;
+export default WyvraClient;

@@ -9,13 +9,13 @@ const goodHashToUnpin = 'Qma6e8dovfLyiG2UUfdkSHNPAySzrWLX9qVXb44v1muqcp';
 
 test('No hashToUnpin value is provided should error', () => {
     expect(() => {
-        unpin({ lyraApiKey: 'test', lyraSecretApiKey: 'test' });
-    }).toThrow('hashToUnpin value is required for removing a pin from Lyra');
+        unpin({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' });
+    }).toThrow('hashToUnpin value is required for removing a pin from Wyvra');
 });
 
 test('Invalid hashToUnpin value is provided', () => {
     expect(() => {
-        unpin({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, badHashToUnpin);
+        unpin({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, badHashToUnpin);
     }).toThrow(`${badHashToUnpin} is an invalid IPFS CID`);
 });
 
@@ -26,7 +26,7 @@ test('200 status is returned', () => {
     };
     (axios.delete as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    expect(unpin({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHashToUnpin)).resolves.toEqual(goodStatus.data);
+    expect(unpin({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHashToUnpin)).resolves.toEqual(goodStatus.data);
 });
 
 test('Result other than 200 status is returned', () => {
@@ -35,12 +35,12 @@ test('Result other than 200 status is returned', () => {
     };
     (axios.delete as jest.Mock).mockResolvedValue(badStatus);
     expect.assertions(1);
-    expect(unpin({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHashToUnpin)).rejects.toEqual(Error(`unknown server response while removing pin from IPFS: ${badStatus}`));
+    expect(unpin({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHashToUnpin)).rejects.toEqual(Error(`unknown server response while removing pin from IPFS: ${badStatus}`));
 });
 
 test('Rejection handled', () => {
     (axios.delete as jest.Mock).mockRejectedValue('test error');
     expect.assertions(1);
-    expect(unpin({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHashToUnpin)).rejects.toEqual('test error');
+    expect(unpin({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHashToUnpin)).rejects.toEqual('test error');
 });
 

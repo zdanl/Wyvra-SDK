@@ -16,7 +16,7 @@ test('200 status is returned', () => {
     expect.assertions(1);
     expect(
         pinFromFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             testSource
         )
     ).resolves.toEqual(goodStatus.data);
@@ -30,7 +30,7 @@ test('Result other than 200 status is returned', () => {
     expect.assertions(1);
     expect(
         pinFromFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             testSource
         )
     ).rejects.toEqual(
@@ -43,7 +43,7 @@ test('Rejection handled', () => {
     expect.assertions(1);
     expect(
         pinFromFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             testSource
         )
     ).rejects.toEqual('test error');

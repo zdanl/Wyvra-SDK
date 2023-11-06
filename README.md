@@ -42,20 +42,21 @@ Once you've set up your instance, using the Wyvra SDK is easy. Simply call your 
 
 * Methods/Functions
   * [PingAPI](#PingAPI-anchor)
-  * [hashMetadata](#hashMetadata-anchor)
-  * [pinByHash](#pinByHash-anchor)
-  * [pinFileToIPFS](#pinFileToIPFS-anchor)
-  * [pinFromFS](#pinFromFS-anchor)
-  * [pinJobs](#pinJobs-anchor)
-  * [pinJSONToIPFS](#pinJSONToIPFS-anchor)
-  * [unpin](#unpin-anchor)
-  * [userPinPolicy](#userPinPolicy-anchor)
+  * [isConnected](#IsConnected-anchor)
+  * [obtainConnection](#obtainConnection-anchor)
+  * [Connect](#Connect-anchor)
+  * [Disconnect](#Disconect-anchor)
+  * [ObtainGitNFTs](#ObtainGitNFTs-anchor)
+  * [DeployGitNFT](#DeployGitNFT-anchor)
+  * [LikeGitNFT](#LikeGitNFT-anchor)
+  * [UnlikeGitNFT](#UnlikeGitNFT-anchor)
+  * [SendEncryptedDM](#SendEncryptedDM-anchor)
+  * [ObtainProfile](#ObtainProfile-anchor)
+  * [SearchGitNFTs](#SearchGitNFTs-anchor)
 
 * Data
   * [isLoggedIn](#isLoggedIn-anchor)
-  * [pinList](#pinList-anchor)
-  * [getFilesByCount](#getFilesByCount-anchor)
-  * [userPinnedDataTotal](#userPinnedDataTotal-anchor)
+  * [connection](#connection-anchor)
 <br />
 
 <a name="hashMetadata-anchor"></a>

@@ -9,7 +9,7 @@ test('Result other than 200 status is returned', () => {
     };
     (axios.get as jest.Mock).mockResolvedValue(badStatus);
     expect.assertions(1);
-    expect(userPinnedDataTotal({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual(Error(`unknown server response while attempting to retrieve pinned data total: ${badStatus}`));
+    expect(userPinnedDataTotal({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual(Error(`unknown server response while attempting to retrieve pinned data total: ${badStatus}`));
 });
 
 test('200 status is returned', () => {
@@ -19,11 +19,11 @@ test('200 status is returned', () => {
     };
     (axios.get as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    expect(userPinnedDataTotal({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).resolves.toEqual(goodStatus.data);
+    expect(userPinnedDataTotal({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).resolves.toEqual(goodStatus.data);
 });
 
 test('Rejection handled', () => {
     (axios.get as jest.Mock).mockRejectedValue('test error');
     expect.assertions(1);
-    expect(userPinnedDataTotal({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual('test error');
+    expect(userPinnedDataTotal({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual('test error');
 });

@@ -6,13 +6,13 @@ import {
 } from '../../util/validators';
 import isIPFS from 'is-ipfs';
 import { handleError } from '../../util/errorResponse';
-import { LyraConfig } from '../..';
-import { LyraMetadata } from '../data/pinList/pinList';
+import { WyvraConfig } from '../..';
+import { WyvraMetadata } from '../data/pinList/pinList';
 
 export default function hashMetadata(
-    config: LyraConfig,
+    config: WyvraConfig,
     ipfsPinHash: string,
-    metadata: LyraMetadata
+    metadata: WyvraMetadata
 ): Promise<any> {
     if (!ipfsPinHash) {
         throw new Error(

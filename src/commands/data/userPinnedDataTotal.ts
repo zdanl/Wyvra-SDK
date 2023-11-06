@@ -2,9 +2,9 @@ import axios from 'axios';
 import { baseUrl } from '../../constants';
 import { createConfigForAxiosHeaders } from '../../util/validators';
 import { handleError } from '../../util/errorResponse';
-import { LyraConfig } from '../..';
+import { WyvraConfig } from '../..';
 
-export default function userPinnedDataTotal(config: LyraConfig): Promise<number> {
+export default function userPinnedDataTotal(config: WyvraConfig): Promise<number> {
     const endpoint = `${baseUrl}/data/userPinnedDataTotal`;
 
     return new Promise((resolve, reject) => {

@@ -1,9 +1,9 @@
 import NodeFormData from 'form-data';
 
-import { LyraConfig } from '../..';
+import { WyvraConfig } from '../..';
 import {
-    LyraPinOptions,
-    LyraPinResponse,
+    WyvraPinOptions,
+    WyvraPinResponse,
     uploadToIPFS
 } from './pinFileToIPFS';
 import fs from 'fs';
@@ -35,10 +35,10 @@ async function readdirRecursive(dir: string) {
 }
 
 export default async function pinFromFS(
-    config: LyraConfig,
+    config: WyvraConfig,
     sourcePath: string,
-    options?: LyraPinOptions
-): Promise<LyraPinResponse> {
+    options?: WyvraPinOptions
+): Promise<WyvraPinResponse> {
     const sourcePathNormalize = path.normalize(sourcePath);
     try {
         const stats = await fs.promises.stat(sourcePathNormalize);

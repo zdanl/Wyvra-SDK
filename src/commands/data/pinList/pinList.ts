@@ -3,33 +3,33 @@ import { baseUrl } from '../../../constants';
 import { createConfigForAxiosHeaders } from '../../../util/validators';
 import { handleError } from '../../../util/errorResponse';
 import queryBuilder from './queryBuilder';
-import { LyraConfig } from '../../..';
-export interface LyraPinRegion {
+import { WyvraConfig } from '../../..';
+export interface WyvraPinRegion {
     regionId: string;
     currentReplicationCount: number;
     desiredReplicationCount: number;
 }
 
-export interface LyraMetadata { [key: string]: string | number | null }
-export interface LyraMetadataFilter {
+export interface WyvraMetadata { [key: string]: string | number | null }
+export interface WyvraMetadataFilter {
     name?: string | undefined;
     keyvalues: { [key: string]: {
         value: string | number | null;
         op: string;
     } }
 }
-export interface LyraPin {
+export interface WyvraPin {
     id: string | number;
     ipfs_pin_hash: string;
     size: number;
     user_id: string | number;
     date_pinned: string;
     date_unpinned: string | null;
-    metadata: LyraMetadata,
-    regions: LyraPinRegion[];
+    metadata: WyvraMetadata,
+    regions: WyvraPinRegion[];
 }
 
-export type LyraPinListFilterOptions = {
+export type WyvraPinListFilterOptions = {
     hashContains?: string | undefined;
     pinStart?: string | undefined;
     pinEnd?: string | undefined;
@@ -40,17 +40,17 @@ export type LyraPinListFilterOptions = {
     status?: string | undefined;
     pageLimit?: number | undefined;
     pageOffset?: number | undefined;
-    metadata?: LyraMetadataFilter | undefined;
+    metadata?: WyvraMetadataFilter | undefined;
 };
 
-export interface LyraPinListResponse {
-    rows: LyraPin[];
+export interface WyvraPinListResponse {
+    rows: WyvraPin[];
 }
 
 export default function pinList(
-    config: LyraConfig,
-    filters:LyraPinListFilterOptions = {}
-): Promise<LyraPinListResponse> {
+    config: WyvraConfig,
+    filters:WyvraPinListFilterOptions = {}
+): Promise<WyvraPinListResponse> {
     filters = { ...filters, ...{ includeCount: 'false' } };
 
     const baseEndpoint = `${baseUrl}/data/pinList`;

@@ -1,20 +1,20 @@
-import { LyraConfig } from '../../..';
-export interface LyraPinJobsResponseRow {
+import { WyvraConfig } from '../../..';
+export interface WyvraPinJobsResponseRow {
     id: number | string;
     ipfs_pin_hash: string;
     date_queued: string;
     name: string | undefined | null;
     status: string;
 }
-export interface LyraPinJobsResponse {
+export interface WyvraPinJobsResponse {
     count: number;
-    rows: LyraPinJobsResponseRow[];
+    rows: WyvraPinJobsResponseRow[];
 }
-export interface LyraPinJobsFilterOptions {
+export interface WyvraPinJobsFilterOptions {
     sort: 'ASC' | 'DESC';
     status?: string | undefined;
     ipfs_pin_hash?: string | undefined;
     limit?: number | undefined;
     offset?: number | undefined;
 }
-export default function pinJobs(config: LyraConfig, filters?: LyraPinJobsFilterOptions): Promise<LyraPinJobsResponse>;
+export default function pinJobs(config: WyvraConfig, filters?: WyvraPinJobsFilterOptions): Promise<WyvraPinJobsResponse>;

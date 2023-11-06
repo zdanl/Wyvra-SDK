@@ -1,28 +1,28 @@
 import './require-babel-polyfill';
-import { LyraPinByHashPinOptions } from './commands/pinning/pinByHash';
-import { LyraPinOptions } from './commands/pinning/pinFileToIPFS';
-import { LyraPinJobsFilterOptions } from './commands/pinning/pinJobs/pinJobs';
-import { LyraMetadata, LyraPinListFilterOptions } from './commands/data/pinList/pinList';
-export interface LyraConfig {
-    lyraApiKey?: string;
-    lyraSecretApiKey?: string;
-    lyraJWTKey?: string;
+import { WyvraPinByHashPinOptions } from './commands/pinning/pinByHash';
+import { WyvraPinOptions } from './commands/pinning/pinFileToIPFS';
+import { WyvraPinJobsFilterOptions } from './commands/pinning/pinJobs/pinJobs';
+import { WyvraMetadata, WyvraPinListFilterOptions } from './commands/data/pinList/pinList';
+export interface WyvraConfig {
+    wyvraApiKey?: string;
+    wyvraSecretApiKey?: string;
+    wyvraJWTKey?: string;
 }
-declare class LyraClient {
-    config: LyraConfig;
-    constructor(lyraApiKey?: string | LyraConfig, lyraSecretApiKey?: string);
-    pinByHash(hashToPin: string, options?: LyraPinByHashPinOptions): Promise<any>;
-    hashMetadata(ipfsPinHash: string, metadata: LyraMetadata): Promise<any>;
-    pinFileToIPFS(readableStream: any, options?: LyraPinOptions): Promise<import("./commands/pinning").LyraPinResponse>;
-    pinFromFS(sourcePath: string, options?: LyraPinOptions): Promise<import("./commands/pinning").LyraPinResponse>;
-    pinJSONToIPFS(body: any, options?: LyraPinOptions): Promise<import("./commands/pinning").LyraPinResponse>;
-    pinJobs(filters?: LyraPinJobsFilterOptions): Promise<import("./commands/pinning").LyraPinJobsResponse>;
+declare class WyvraClient {
+    config: WyvraConfig;
+    constructor(wyvraApiKey?: string | WyvraConfig, wyvraSecretApiKey?: string);
+    pinByHash(hashToPin: string, options?: WyvraPinByHashPinOptions): Promise<any>;
+    hashMetadata(ipfsPinHash: string, metadata: WyvraMetadata): Promise<any>;
+    pinFileToIPFS(readableStream: any, options?: WyvraPinOptions): Promise<import("./commands/pinning").WyvraPinResponse>;
+    pinFromFS(sourcePath: string, options?: WyvraPinOptions): Promise<import("./commands/pinning").WyvraPinResponse>;
+    pinJSONToIPFS(body: any, options?: WyvraPinOptions): Promise<import("./commands/pinning").WyvraPinResponse>;
+    pinJobs(filters?: WyvraPinJobsFilterOptions): Promise<import("./commands/pinning").WyvraPinJobsResponse>;
     unpin(hashToUnpin: string): Promise<unknown>;
-    pinList(filters: LyraPinListFilterOptions): Promise<import("./commands/data").LyraPinListResponse>;
-    getFilesByCount(filters: LyraPinListFilterOptions, maxCount?: number): {
+    pinList(filters: WyvraPinListFilterOptions): Promise<import("./commands/data").WyvraPinListResponse>;
+    getFilesByCount(filters: WyvraPinListFilterOptions, maxCount?: number): {
         [Symbol.asyncIterator]: () => {
             next(): Promise<{
-                value: import("./commands/data").LyraPin;
+                value: import("./commands/data").WyvraPin;
                 done: boolean;
             }>;
             return(): Promise<{
@@ -31,9 +31,9 @@ declare class LyraClient {
             }>;
         };
     };
-    testAuthentication(): Promise<import("./commands/data").LyraTestAuthenticationResponse>;
+    testAuthentication(): Promise<import("./commands/data").WyvraTestAuthenticationResponse>;
     userPinnedDataTotal(): Promise<number>;
 }
 export * from './commands/data';
 export * from './commands/pinning';
-export default LyraClient;
+export default WyvraClient;

@@ -1,10 +1,10 @@
-import { LyraConfig } from '../../..';
-import pinList, { LyraPin, LyraPinListFilterOptions } from '../pinList/pinList';
+import { WyvraConfig } from '../../..';
+import pinList, { WyvraPin, WyvraPinListFilterOptions } from '../pinList/pinList';
 
 export default function getFilesByCount(
-    config: LyraConfig,
+    config: WyvraConfig,
 
-    filters: LyraPinListFilterOptions = {},
+    filters: WyvraPinListFilterOptions = {},
     maxCount = -1
 ) {
     if (maxCount === 0) {
@@ -16,7 +16,7 @@ export default function getFilesByCount(
             let i = 0;
             const pageLimit = 10;
             let pageOffset = 0;
-            let cache: LyraPin[] = [];
+            let cache: WyvraPin[] = [];
             let keepLooping = false;
 
             return {

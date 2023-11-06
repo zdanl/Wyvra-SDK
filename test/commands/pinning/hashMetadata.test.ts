@@ -23,19 +23,19 @@ const metadataTwo = {
 
 test('No ipfsPinHash value provided should error', () => {
     expect(() => {
-        hashMetadata({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, null, metadata);
+        hashMetadata({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, null, metadata);
     }).toThrow();
 });
 
 test('Invalid ipfsPinHash value is provided', () => {
     expect(() => {
-        hashMetadata({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, badHash, metadata);
+        hashMetadata({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, badHash, metadata);
     }).toThrow();
 });
 
 test('No metadata object provided should error', () => {
     expect(() => {
-        hashMetadata({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHash);
+        hashMetadata({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHash);
     }).toThrow();
 });
 
@@ -46,7 +46,7 @@ test('One keyvalue pair is added', () => {
     };
     (axios.put as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    expect(hashMetadata({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHash, metadata)).resolves.toEqual(goodStatus.data);
+    expect(hashMetadata({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHash, metadata)).resolves.toEqual(goodStatus.data);
 });
 
 test('Two keyvalue pairs is added', () => {
@@ -56,7 +56,7 @@ test('Two keyvalue pairs is added', () => {
     };
     (axios.put as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    expect(hashMetadata({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHash, metadataTwo)).resolves.toEqual(goodStatus.data);
+    expect(hashMetadata({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHash, metadataTwo)).resolves.toEqual(goodStatus.data);
 });
 
 test('Result other than 200 status is returned', () => {
@@ -65,12 +65,12 @@ test('Result other than 200 status is returned', () => {
     };
     (axios.put as jest.Mock).mockResolvedValue(badStatus);
     expect.assertions(1);
-    expect(hashMetadata({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHash, metadata)).rejects.toEqual(Error(`unknown server response while changing metadata for hash: ${JSON.stringify(badStatus, null, 2)}`));
+    expect(hashMetadata({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHash, metadata)).rejects.toEqual(Error(`unknown server response while changing metadata for hash: ${JSON.stringify(badStatus, null, 2)}`));
 });
 
 test('Rejection handled', () => {
     (axios.put as jest.Mock).mockRejectedValue('test error');
     expect.assertions(1);
-    expect(hashMetadata({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHash, metadata)).rejects.toEqual('test error');
+    expect(hashMetadata({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHash, metadata)).rejects.toEqual('test error');
 });
 

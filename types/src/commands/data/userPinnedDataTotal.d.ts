@@ -1,2 +1,2 @@
-import { LyraConfig } from '../..';
-export default function userPinnedDataTotal(config: LyraConfig): Promise<number>;
+import { WyvraConfig } from '../..';
+export default function userPinnedDataTotal(config: WyvraConfig): Promise<number>;

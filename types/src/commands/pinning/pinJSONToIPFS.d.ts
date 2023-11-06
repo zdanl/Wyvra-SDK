@@ -1,3 +1,3 @@
-import { LyraConfig } from '../..';
-import { LyraPinOptions, LyraPinResponse } from './pinFileToIPFS';
-export default function pinJSONToIPFS(config: LyraConfig, body: any, options?: LyraPinOptions): Promise<LyraPinResponse>;
+import { WyvraConfig } from '../..';
+import { WyvraPinOptions, WyvraPinResponse } from './pinFileToIPFS';
+export default function pinJSONToIPFS(config: WyvraConfig, body: any, options?: WyvraPinOptions): Promise<WyvraPinResponse>;

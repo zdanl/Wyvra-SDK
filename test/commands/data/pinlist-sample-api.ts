@@ -3,9 +3,9 @@ import { version } from '../../../package.json';
 
 export const fakeHeaders = {
     headers: {
-        lyra_api_key: 'anykey',
-        lyra_secret_api_key: 'anysecret',
-        'x-lyra-origin': 'sdk',
+        wyvra_api_key: 'anykey',
+        wyvra_secret_api_key: 'anysecret',
+        'x-wyvra-origin': 'sdk',
         'x-version': version
     },
     withCredentials: true

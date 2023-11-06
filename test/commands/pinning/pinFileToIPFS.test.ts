@@ -6,16 +6,16 @@ jest.mock('axios');
 
 //common values
 const nonStream = 'test';
-const validStream = fs.createReadStream('./lyra.png');
+const validStream = fs.createReadStream('./wyvra.png');
 const validFormData = new NodeFormData();
 validFormData.append('file', validStream, { filepath: 'test/filepath' });
 
 test('non-readableStream and non-formData is passed in', () => {
     expect(
         pinFileToIPFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             nonStream,
-            { lyraMetadata: { name: 'text.txt' } }
+            { wyvraMetadata: { name: 'text.txt' } }
         )
     ).rejects.toEqual(
         Error('readStream is not a readable stream or form data')
@@ -33,9 +33,9 @@ test('200 status is returned with valid stream', () => {
     expect.assertions(1);
     expect(
         pinFileToIPFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             validStream,
-            { lyraMetadata: { name: 'text.txt' } }
+            { wyvraMetadata: { name: 'text.txt' } }
         )
     ).resolves.toEqual(goodStatus.data);
 });
@@ -49,9 +49,9 @@ test('200 status is returned with valid form data', () => {
     expect.assertions(1);
     expect(
         pinFileToIPFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             validFormData,
-            { lyraMetadata: { name: 'text.txt' } }
+            { wyvraMetadata: { name: 'text.txt' } }
         )
     ).resolves.toEqual(goodStatus.data);
 });
@@ -64,9 +64,9 @@ test('Result other than 200 status is returned', () => {
     expect.assertions(1);
     expect(
         pinFileToIPFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             validStream,
-            { lyraMetadata: { name: 'text.txt' } }
+            { wyvraMetadata: { name: 'text.txt' } }
         )
     ).rejects.toEqual(
         Error(
@@ -80,9 +80,9 @@ test('Rejection handled', () => {
     expect.assertions(1);
     expect(
         pinFileToIPFS(
-            { lyraApiKey: 'test', lyraSecretApiKey: 'test' },
+            { wyvraApiKey: 'test', wyvraSecretApiKey: 'test' },
             validStream,
-            { lyraMetadata: { name: 'text.txt' } }
+            { wyvraMetadata: { name: 'text.txt' } }
         )
     ).rejects.toEqual('test error');
 });

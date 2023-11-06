@@ -9,7 +9,7 @@ test('Result other than 200 status is returned', () => {
     };
     (axios.get as jest.Mock).mockResolvedValue(badStatus);
     expect.assertions(1);
-    expect(pinJobs({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual(Error(`unknown server response while attempting to retrieve pin jobs: ${badStatus}`));
+    expect(pinJobs({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual(Error(`unknown server response while attempting to retrieve pin jobs: ${badStatus}`));
 });
 
 test('200 status is returned', () => {
@@ -19,11 +19,11 @@ test('200 status is returned', () => {
     };
     (axios.get as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    expect(pinJobs({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).resolves.toEqual(goodStatus.data);
+    expect(pinJobs({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).resolves.toEqual(goodStatus.data);
 });
 
 test('Rejection handled', () => {
     (axios.get as jest.Mock).mockRejectedValue('test error');
     expect.assertions(1);
-    expect(pinJobs({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual('test error');
+    expect(pinJobs({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual('test error');
 });

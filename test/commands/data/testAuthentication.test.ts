@@ -9,7 +9,7 @@ test('Result other than 200 status is returned', () => {
     };
     (axios.get as jest.Mock).mockResolvedValue(badStatus);
     expect.assertions(1);
-    return expect(testAuthentication({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual(
+    return expect(testAuthentication({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual(
         Error(`unknown server response while authenticating: ${badStatus}`)
     );
 });
@@ -20,7 +20,7 @@ test('200 status is returned', () => {
     };
     (axios.get as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    return expect(testAuthentication({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).resolves.toEqual({
+    return expect(testAuthentication({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).resolves.toEqual({
         authenticated: true
     });
 });
@@ -28,7 +28,7 @@ test('200 status is returned', () => {
 test('Rejection handled', () => {
     (axios.get as jest.Mock).mockRejectedValue('test error');
     expect.assertions(1);
-    return expect(testAuthentication({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual(
+    return expect(testAuthentication({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual(
         'test error'
     );
 });

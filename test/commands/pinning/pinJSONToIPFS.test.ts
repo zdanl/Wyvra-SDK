@@ -11,7 +11,7 @@ const goodJSON = {
 
 test('non-object is passed in', () => {
     expect(() => {
-        pinJSONToIPFS({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, badJSON);
+        pinJSONToIPFS({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, badJSON);
     }).toThrow('body must be a valid JSON object');
 });
 
@@ -22,7 +22,7 @@ test('200 status is returned', () => {
     };
     (axios.post as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    expect(pinJSONToIPFS({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodJSON)).resolves.toEqual(goodStatus.data);
+    expect(pinJSONToIPFS({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodJSON)).resolves.toEqual(goodStatus.data);
 });
 
 test('Result other than 200 status is returned', () => {
@@ -31,12 +31,12 @@ test('Result other than 200 status is returned', () => {
     };
     (axios.post as jest.Mock).mockResolvedValue(badStatus);
     expect.assertions(1);
-    expect(pinJSONToIPFS({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodJSON)).rejects.toEqual(Error(`unknown server response while pinning JSON to IPFS: ${badStatus}`));
+    expect(pinJSONToIPFS({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodJSON)).rejects.toEqual(Error(`unknown server response while pinning JSON to IPFS: ${badStatus}`));
 });
 
 test('Rejection handled', () => {
     (axios.post as jest.Mock).mockRejectedValue('test error');
     expect.assertions(1);
-    expect(pinJSONToIPFS({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodJSON)).rejects.toEqual('test error');
+    expect(pinJSONToIPFS({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodJSON)).rejects.toEqual('test error');
 });
 

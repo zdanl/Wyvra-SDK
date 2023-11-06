@@ -2,13 +2,13 @@ import axios from 'axios';
 import { baseUrl } from '../../constants';
 import {createConfigForAxiosHeaders} from '../../util/validators';
 import { handleError } from '../../util/errorResponse';
-import { LyraConfig } from '../..';
+import { WyvraConfig } from '../..';
 
-export interface LyraTestAuthenticationResponse {
+export interface WyvraTestAuthenticationResponse {
     authenticated: boolean;
 }
 
-export default function testAuthentication(config: LyraConfig): Promise<LyraTestAuthenticationResponse> {
+export default function testAuthentication(config: WyvraConfig): Promise<WyvraTestAuthenticationResponse> {
     //  test authentication to make sure that the user's provided keys are legit
     const endpoint = `${baseUrl}/data/testAuthentication`;
 

@@ -1,10 +1,10 @@
-import { LyraConfig } from '../../..';
-import { LyraPin, LyraPinListFilterOptions } from '../pinList/pinList';
+import { WyvraConfig } from '../../..';
+import { WyvraPin, WyvraPinListFilterOptions } from '../pinList/pinList';
 
-export default function getFilesByCount(config: LyraConfig, filters?: LyraPinListFilterOptions, maxCount?: number): {
+export default function getFilesByCount(config: WyvraConfig, filters?: WyvraPinListFilterOptions, maxCount?: number): {
     [Symbol.asyncIterator]: () => {
         next(): Promise<{
-            value: LyraPin;
+            value: WyvraPin;
             done: boolean;
         }>;
         return(): Promise<{

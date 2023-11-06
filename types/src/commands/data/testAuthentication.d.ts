@@ -1,5 +1,5 @@
-import { LyraConfig } from '../..';
-export interface LyraTestAuthenticationResponse {
+import { WyvraConfig } from '../..';
+export interface WyvraTestAuthenticationResponse {
     authenticated: boolean;
 }
-export default function testAuthentication(config: LyraConfig): Promise<LyraTestAuthenticationResponse>;
+export default function testAuthentication(config: WyvraConfig): Promise<WyvraTestAuthenticationResponse>;

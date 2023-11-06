@@ -3,21 +3,21 @@ import { baseUrl } from '../../../constants';
 import { createConfigForAxiosHeaders } from '../../../util/validators';
 import queryBuilder from './queryBuilder';
 import { handleError } from '../../../util/errorResponse';
-import { LyraConfig } from '../../..';
+import { WyvraConfig } from '../../..';
 
-export interface LyraPinJobsResponseRow {
+export interface WyvraPinJobsResponseRow {
     id: number | string;
     ipfs_pin_hash: string;
     date_queued: string;
     name: string | undefined | null;
     status: string;
 }
-export interface LyraPinJobsResponse {
+export interface WyvraPinJobsResponse {
     count: number;
-    rows: LyraPinJobsResponseRow[];
+    rows: WyvraPinJobsResponseRow[];
 }
 
-export interface LyraPinJobsFilterOptions {
+export interface WyvraPinJobsFilterOptions {
     sort: 'ASC' | 'DESC';
     status?: string | undefined;
     ipfs_pin_hash?: string | undefined;
@@ -25,7 +25,7 @@ export interface LyraPinJobsFilterOptions {
     offset?: number | undefined;
 }
 
-export default function pinJobs(config: LyraConfig, filters? : LyraPinJobsFilterOptions): Promise<LyraPinJobsResponse> {
+export default function pinJobs(config: WyvraConfig, filters? : WyvraPinJobsFilterOptions): Promise<WyvraPinJobsResponse> {
 
     let endpoint = `${baseUrl}/pinning/pinJobs`;
 

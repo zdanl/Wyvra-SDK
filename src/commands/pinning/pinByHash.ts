@@ -3,23 +3,23 @@ import { baseUrl } from '../../constants';
 import { createConfigForAxiosHeaders, validateMetadata } from '../../util/validators';
 import isIPFS from 'is-ipfs';
 import { handleError } from '../../util/errorResponse';
-import { LyraConfig } from '../..';
-import { LyraOptions } from './pinFileToIPFS';
-import { LyraMetadata } from '../data/pinList/pinList';
+import { WyvraConfig } from '../..';
+import { WyvraOptions } from './pinFileToIPFS';
+import { WyvraMetadata } from '../data/pinList/pinList';
 
-export interface LyraPinByHashPinOptions {
-    lyraMetadata?: LyraMetadata;
-    lyraOptions?: LyraOptions ;
+export interface WyvraPinByHashPinOptions {
+    wyvraMetadata?: WyvraMetadata;
+    wyvraOptions?: WyvraOptions ;
 }
 
-export interface LyraPinByHashResponse {
+export interface WyvraPinByHashResponse {
     id: number | string;
     ipfsHash: string;
     status: string;
     name: string;
 }
 
-export default function pinByHash(config: LyraConfig, hashToPin: string, options: any): Promise<any> {
+export default function pinByHash(config: WyvraConfig, hashToPin: string, options: any): Promise<any> {
     if (!hashToPin) {
         throw new Error('hashToPin value is required for pinning by hash');
     }
@@ -30,20 +30,20 @@ export default function pinByHash(config: LyraConfig, hashToPin: string, options
     const endpoint = `${baseUrl}/pinning/pinByHash`;
     const body : {
         hashToPin: any,
-        lyraOptions: any,
-        lyraMetadata?: any,
+        wyvraOptions: any,
+        wyvraMetadata?: any,
     } = {
         hashToPin: hashToPin,
-        lyraOptions: {}
+        wyvraOptions: {}
     };
 
     if (options) {
-        if (options.lyraOptions) {
-            body.lyraOptions = options.lyraOptions;
+        if (options.wyvraOptions) {
+            body.wyvraOptions = options.wyvraOptions;
         }
-        if (options.lyraMetadata) {
-            validateMetadata(options.lyraMetadata);
-            body.lyraMetadata = options.lyraMetadata;
+        if (options.wyvraMetadata) {
+            validateMetadata(options.wyvraMetadata);
+            body.wyvraMetadata = options.wyvraMetadata;
         }
     }
 

@@ -1,25 +1,25 @@
 import NodeFormData from 'form-data';
-import { LyraConfig, LyraMetadata } from '../..';
-export interface LyraPinPolicyItem {
+import { WyvraConfig, WyvraMetadata } from '../..';
+export interface WyvraPinPolicyItem {
     id: string;
     desiredReplicationCount: number;
 }
-export interface LyraOptions {
+export interface WyvraOptions {
     hostNodes?: string[] | undefined;
     cidVersion?: 0 | 1;
     wrapWithDirectory?: boolean;
     customPinPolicy?: {
-        regions: LyraPinPolicyItem[];
+        regions: WyvraPinPolicyItem[];
     };
 }
-export interface LyraPinResponse {
+export interface WyvraPinResponse {
     IpfsHash: string;
     PinSize: number;
     Timestamp: string;
 }
-export interface LyraPinOptions {
-    lyraMetadata?: LyraMetadata;
-    lyraOptions?: LyraOptions | undefined;
+export interface WyvraPinOptions {
+    wyvraMetadata?: WyvraMetadata;
+    wyvraOptions?: WyvraOptions | undefined;
 }
-export declare function uploadToIPFS(config: LyraConfig, data: NodeFormData, options?: LyraPinOptions): Promise<LyraPinResponse>;
-export default function pinFileToIPFS(config: LyraConfig, readStream: any, options?: LyraPinOptions): Promise<LyraPinResponse>;
+export declare function uploadToIPFS(config: WyvraConfig, data: NodeFormData, options?: WyvraPinOptions): Promise<WyvraPinResponse>;
+export default function pinFileToIPFS(config: WyvraConfig, readStream: any, options?: WyvraPinOptions): Promise<WyvraPinResponse>;

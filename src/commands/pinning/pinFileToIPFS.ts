@@ -5,51 +5,51 @@ import stream from 'stream';
 import {
     createConfigForAxiosHeadersWithFormData,
     validateMetadata,
-    validateLyraOptions
+    validateWyvraOptions
 } from '../../util/validators';
 import { handleError } from '../../util/errorResponse';
-import { LyraConfig, LyraMetadata } from '../..';
+import { WyvraConfig, WyvraMetadata } from '../..';
 
-export interface LyraPinPolicyItem {
+export interface WyvraPinPolicyItem {
     id: string;
     desiredReplicationCount: number;
 }
-export interface LyraOptions {
+export interface WyvraOptions {
     hostNodes?: string[] | undefined;
     cidVersion?: 0 | 1;
     wrapWithDirectory?: boolean;
     customPinPolicy?: {
-        regions: LyraPinPolicyItem[];
+        regions: WyvraPinPolicyItem[];
     };
 }
 
-export interface LyraPinResponse {
+export interface WyvraPinResponse {
     IpfsHash: string;
     PinSize: number;
     Timestamp: string;
 }
-export interface LyraPinOptions {
-    lyraMetadata?: LyraMetadata;
-    lyraOptions?: LyraOptions | undefined;
+export interface WyvraPinOptions {
+    wyvraMetadata?: WyvraMetadata;
+    wyvraOptions?: WyvraOptions | undefined;
 }
 const endpoint = `${baseUrl}/pinning/pinFileToIPFS`;
 
 export function uploadToIPFS(
-    config: LyraConfig,
+    config: WyvraConfig,
     data: NodeFormData,
-    options?: LyraPinOptions
-): Promise<LyraPinResponse> {
+    options?: WyvraPinOptions
+): Promise<WyvraPinResponse> {
     return new Promise((resolve, reject) => {
-        if (options && options.lyraMetadata) {
-            validateMetadata(options.lyraMetadata);
+        if (options && options.wyvraMetadata) {
+            validateMetadata(options.wyvraMetadata);
             data.append(
-                'lyraMetadata',
-                JSON.stringify(options.lyraMetadata)
+                'wyvraMetadata',
+                JSON.stringify(options.wyvraMetadata)
             );
         }
-        if (options && options.lyraOptions) {
-            validateLyraOptions(options.lyraOptions);
-            data.append('lyraOptions', JSON.stringify(options.lyraOptions));
+        if (options && options.wyvraOptions) {
+            validateWyvraOptions(options.wyvraOptions);
+            data.append('wyvraOptions', JSON.stringify(options.wyvraOptions));
         }
 
         axios
@@ -79,27 +79,27 @@ export function uploadToIPFS(
 }
 
 export default function pinFileToIPFS(
-    config: LyraConfig,
+    config: WyvraConfig,
     readStream: any,
-    options?: LyraPinOptions
-): Promise<LyraPinResponse> {
+    options?: WyvraPinOptions
+): Promise<WyvraPinResponse> {
     return new Promise((resolve, reject) => {
         const data = new NodeFormData();
 
         if (
             !(
-                options?.lyraMetadata?.name &&
-                typeof options.lyraMetadata.name === 'string' &&
-                options.lyraMetadata.name.length > 0
+                options?.wyvraMetadata?.name &&
+                typeof options.wyvraMetadata.name === 'string' &&
+                options.wyvraMetadata.name.length > 0
             )
         ) {
             throw Error(
-                'filename was not provide, make sure to provide options.lyraMetadata.name'
+                'filename was not provide, make sure to provide options.wyvraMetadata.name'
             );
         }
 
         data.append('file', readStream, {
-            filename: options.lyraMetadata.name
+            filename: options.wyvraMetadata.name
         });
 
         if (

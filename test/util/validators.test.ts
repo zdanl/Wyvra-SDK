@@ -4,22 +4,22 @@ import {
     validateHostNodes,
     validateMetadata,
     validatePinPolicyStructure,
-    validateLyraOptions
+    validateWyvraOptions
 } from '../../src/util/validators';
 import { ERROR_NO_CREDENTIALS_PROVIDED } from '../../src/constants';
 import { version } from '../../package.json';
 
 describe('validateApiKeys function testing', () => {
-    test('check to throw if either lyraApiKey or lyraSecretApiKey are not provided', () => {
+    test('check to throw if either wyvraApiKey or wyvraSecretApiKey are not provided', () => {
         expect(() => {
             validateApiKeys('', 'test');
         }).toThrow(
-            'No lyraApiKey provided! Please provide your lyra api key as an argument when you start this script'
+            'No wyvraApiKey provided! Please provide your wyvra api key as an argument when you start this script'
         );
         expect(() => {
             validateApiKeys('test', '');
         }).toThrow(
-            'No lyraSecretApiKey provided! Please provide your lyra secret api key as an argument when you start this script'
+            'No wyvraSecretApiKey provided! Please provide your wyvra secret api key as an argument when you start this script'
         );
     });
 });
@@ -30,24 +30,24 @@ describe('createConfigForAxiosHeaders function testing', () => {
     }).toThrow(ERROR_NO_CREDENTIALS_PROVIDED);
 
     expect(() => {
-        createConfigForAxiosHeaders({ lyraApiKey: 'some api key' });
+        createConfigForAxiosHeaders({ wyvraApiKey: 'some api key' });
     }).toThrow(ERROR_NO_CREDENTIALS_PROVIDED);
 
     expect(() => {
-        createConfigForAxiosHeaders({ lyraSecretApiKey: 'some api secret' });
+        createConfigForAxiosHeaders({ wyvraSecretApiKey: 'some api secret' });
     }).toThrow(ERROR_NO_CREDENTIALS_PROVIDED);
 
     expect(
         createConfigForAxiosHeaders({
-            lyraApiKey: 'some api key',
-            lyraSecretApiKey: 'some api secret'
+            wyvraApiKey: 'some api key',
+            wyvraSecretApiKey: 'some api secret'
         })
     ).toEqual({
         withCredentials: true,
         headers: {
-            lyra_api_key: 'some api key',
-            lyra_secret_api_key: 'some api secret',
-            'x-lyra-origin': 'sdk',
+            wyvra_api_key: 'some api key',
+            wyvra_secret_api_key: 'some api secret',
+            'x-wyvra-origin': 'sdk',
             'x-version': version
         }
     });
@@ -209,10 +209,10 @@ describe('validatePinPolicyStructure function testing', () => {
     });
 });
 
-describe('validateLyraOptions function testing', () => {
+describe('validateWyvraOptions function testing', () => {
     test('options is not an object', () => {
         expect(() => {
-            validateLyraOptions('test');
+            validateWyvraOptions('test');
         }).toThrow('options must be an object');
     });
     test('cidVersion is not a 0 or 1', () => {
@@ -220,14 +220,14 @@ describe('validateLyraOptions function testing', () => {
             test: 'testing'
         };
         expect(() => {
-            validateLyraOptions({
+            validateWyvraOptions({
                 cidVersion: badVersion
             });
         }).toThrow('unsupported or invalid cidVersion');
     });
     test('wrapWithDirectory is not true or false', () => {
         expect(() => {
-            validateLyraOptions({
+            validateWyvraOptions({
                 wrapWithDirectory: 'test'
             });
         }).toThrow(

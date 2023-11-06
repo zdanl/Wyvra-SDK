@@ -1,3 +1,3 @@
-import { LyraConfig } from '../..';
-import { LyraMetadata } from '../data/pinList/pinList';
-export default function hashMetadata(config: LyraConfig, ipfsPinHash: string, metadata: LyraMetadata): Promise<any>;
+import { WyvraConfig } from '../..';
+import { WyvraMetadata } from '../data/pinList/pinList';
+export default function hashMetadata(config: WyvraConfig, ipfsPinHash: string, metadata: WyvraMetadata): Promise<any>;

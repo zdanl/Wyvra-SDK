@@ -19,15 +19,15 @@ describe('Pin List by page', () => {
 
         const resp = await pinList(
             {
-                lyraApiKey: fakeHeaders.headers.lyra_api_key,
-                lyraSecretApiKey: fakeHeaders.headers.lyra_secret_api_key
+                wyvraApiKey: fakeHeaders.headers.wyvra_api_key,
+                wyvraSecretApiKey: fakeHeaders.headers.wyvra_secret_api_key
             },
             { pageLimit: 10, pageOffset: 0, status: 'pinned' }
         );
         const resp2 = await pinList(
             {
-                lyraApiKey: fakeHeaders.headers.lyra_api_key,
-                lyraSecretApiKey: fakeHeaders.headers.lyra_secret_api_key
+                wyvraApiKey: fakeHeaders.headers.wyvra_api_key,
+                wyvraSecretApiKey: fakeHeaders.headers.wyvra_secret_api_key
             },
             { pageLimit: 10, pageOffset: 10, status: 'pinned' }
         );
@@ -55,8 +55,8 @@ describe('Pin List by page', () => {
 
         const resp = await pinList(
             {
-                lyraApiKey: fakeHeaders.headers.lyra_api_key,
-                lyraSecretApiKey: fakeHeaders.headers.lyra_secret_api_key
+                wyvraApiKey: fakeHeaders.headers.wyvra_api_key,
+                wyvraSecretApiKey: fakeHeaders.headers.wyvra_secret_api_key
             },
             { pageLimit: 10, pageOffset: 0, status: 'pinned' }
         );
@@ -77,7 +77,7 @@ describe('Pin List by page', () => {
         };
         (axios.get as jest.Mock).mockResolvedValue(badStatus);
         expect.assertions(1);
-        expect(pinList({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual(
+        expect(pinList({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual(
             Error(
                 `unknown server response while attempting to retrieve user pin list: ${badStatus}`
             )
@@ -91,12 +91,12 @@ describe('Pin List by page', () => {
         };
         (axios.get as jest.Mock).mockResolvedValue(goodStatus);
         expect.assertions(1);
-        expect(pinList({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).resolves.toEqual(goodStatus.data);
+        expect(pinList({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).resolves.toEqual(goodStatus.data);
     });
 
     test('Rejection handled', () => {
         (axios.get as jest.Mock).mockRejectedValue('test error');
         expect.assertions(1);
-        expect(pinList({ lyraApiKey: 'test', lyraSecretApiKey: 'test' })).rejects.toEqual('test error');
+        expect(pinList({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' })).rejects.toEqual('test error');
     });
 });

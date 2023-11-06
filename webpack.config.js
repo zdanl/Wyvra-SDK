@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 
-const libraryName = 'lyra-sdk';
+const libraryName = 'wyvra-sdk';
 
 module.exports = (env) => {
     let outputFile, mode;

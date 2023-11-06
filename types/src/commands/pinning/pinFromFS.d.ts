@@ -1,4 +1,4 @@
-import { LyraConfig } from '../..';
-import { LyraPinOptions, LyraPinResponse } from './pinFileToIPFS';
+import { WyvraConfig } from '../..';
+import { WyvraPinOptions, WyvraPinResponse } from './pinFileToIPFS';
 export declare function normalizePath(p: string, folderLevel?: number): string;
-export default function pinFromFS(config: LyraConfig, sourcePath: string, options?: LyraPinOptions): Promise<LyraPinResponse>;
+export default function pinFromFS(config: WyvraConfig, sourcePath: string, options?: WyvraPinOptions): Promise<WyvraPinResponse>;

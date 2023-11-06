@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { baseUrl } from '../../constants';
-import { createConfigForAxiosHeaders, validateMetadata, validateLyraOptions } from '../../util/validators';
+import { createConfigForAxiosHeaders, validateMetadata, validateWyvraOptions } from '../../util/validators';
 import { handleError } from '../../util/errorResponse';
-import { LyraConfig } from '../..';
-import { LyraPinOptions, LyraPinResponse } from './pinFileToIPFS';
+import { WyvraConfig } from '../..';
+import { WyvraPinOptions, WyvraPinResponse } from './pinFileToIPFS';
 
-export default function pinJSONToIPFS(config: LyraConfig, body: any, options? : LyraPinOptions):Promise<LyraPinResponse> {
+export default function pinJSONToIPFS(config: WyvraConfig, body: any, options? : WyvraPinOptions):Promise<WyvraPinResponse> {
 
     let requestBody: any = body;
 
@@ -15,15 +15,15 @@ export default function pinJSONToIPFS(config: LyraConfig, body: any, options? : 
 
     if (options) {
         requestBody = {
-            lyraContent: body
+            wyvraContent: body
         };
-        if (options.lyraMetadata) {
-            validateMetadata(options.lyraMetadata);
-            requestBody.lyraMetadata = options.lyraMetadata;
+        if (options.wyvraMetadata) {
+            validateMetadata(options.wyvraMetadata);
+            requestBody.wyvraMetadata = options.wyvraMetadata;
         }
-        if (options.lyraOptions) {
-            validateLyraOptions(options.lyraOptions);
-            requestBody.lyraOptions = options.lyraOptions;
+        if (options.wyvraOptions) {
+            validateWyvraOptions(options.wyvraOptions);
+            requestBody.wyvraOptions = options.wyvraOptions;
         }
     }
 

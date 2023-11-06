@@ -3,11 +3,11 @@ import { baseUrl } from '../../constants';
 import { createConfigForAxiosHeaders } from '../../util/validators';
 import isIPFS from 'is-ipfs';
 import { handleError } from '../../util/errorResponse';
-import { LyraConfig } from '../..';
+import { WyvraConfig } from '../..';
 
-export default function unpin(config: LyraConfig, hashToUnpin: string) {
+export default function unpin(config: WyvraConfig, hashToUnpin: string) {
     if (!hashToUnpin) {
-        throw new Error('hashToUnpin value is required for removing a pin from Lyra');
+        throw new Error('hashToUnpin value is required for removing a pin from Wyvra');
     }
     if (!isIPFS.cid(hashToUnpin)) {
         throw new Error(`${hashToUnpin} is an invalid IPFS CID`);

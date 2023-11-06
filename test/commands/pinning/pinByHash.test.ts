@@ -15,7 +15,7 @@ test('No hashToPin value is provided should error', () => {
 
 test('Invalid HashToPin value is provided', () => {
     expect(() => {
-        pinByHash({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, badHashToPin);
+        pinByHash({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, badHashToPin);
     }).toThrow();
 });
 
@@ -26,7 +26,7 @@ test('200 status is returned', () => {
     };
     (axios.post as jest.Mock).mockResolvedValue(goodStatus);
     expect.assertions(1);
-    expect(pinByHash({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHashToPin)).resolves.toEqual(goodStatus.data);
+    expect(pinByHash({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHashToPin)).resolves.toEqual(goodStatus.data);
 });
 
 test('Result other than 200 status is returned', () => {
@@ -35,12 +35,12 @@ test('Result other than 200 status is returned', () => {
     };
     (axios.post as jest.Mock).mockResolvedValue(badStatus);
     expect.assertions(1);
-    expect(pinByHash({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHashToPin)).rejects.toEqual(Error(`unknown server response while adding to pin queue: ${badStatus}`));
+    expect(pinByHash({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHashToPin)).rejects.toEqual(Error(`unknown server response while adding to pin queue: ${badStatus}`));
 });
 
 test('Rejection handled', () => {
     (axios.post as jest.Mock).mockRejectedValue('test error');
     expect.assertions(1);
-    expect(pinByHash({ lyraApiKey: 'test', lyraSecretApiKey: 'test' }, goodHashToPin)).rejects.toEqual('test error');
+    expect(pinByHash({ wyvraApiKey: 'test', wyvraSecretApiKey: 'test' }, goodHashToPin)).rejects.toEqual('test error');
 });
 
