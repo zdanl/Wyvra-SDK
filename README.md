@@ -37,6 +37,20 @@ Wyvra.PingAPI().then((result) => {
 });
 ```
 
+Quickly authenticate to the Wyvra Git NFT Marketplace and pull all GitNFT's of a certain user:
+
+```javascript
+try {
+    const pingResult = await Wyvra.PingAPI();
+    const authResult = await Wyvra.Connect("you@wyvra.com", "pw");
+    const nftResult = await Wyvra.ObtainGitNFTs("dnI3or4Rr3E");
+} catch(err) {
+    // authentication failed
+    console.log(err)
+}
+    
+```
+
 ## Usage
 Once you've set up your instance, using the Wyvra SDK is easy. Simply call your desired function and handle the results of the promise.
 
